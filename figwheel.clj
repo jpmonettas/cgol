@@ -13,11 +13,14 @@
   :build-ids ["dev"]
   :all-builds [{:id "dev", 
                 :source-paths ["src"],
-                :figwheel true
+                :figwheel {:on-jsload "cgol.core/mount-root"}
                 :compiler {:main "cgol.core"
                            :asset-path "js/out",
                            :optimizations :none
-                           :output-to "resources/public/js/cogl.js",
+                           :preloads ['day8.re-frame-10x.preload 'devtools.preload]
+                           :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true
+                                             "goog.DEBUG" true}
+                           :output-to "resources/public/js/cgol.js",
                            :output-dir "resources/public/js/out",
                            :source-map-timestamp true}}]})
 
