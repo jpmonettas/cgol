@@ -1,7 +1,9 @@
 (ns cgol.db
-  (:require [clojure.spec.alpha :as s]))
+  (:require [clojure.spec.alpha :as s]
+            [cgol.world :as world]))
 
-(s/def ::counter int?)
-(s/def ::db (s/keys :req-un [::counter]))
+(s/def ::db any?)
 
-(def app-db {:counter 0})
+(def app-db {:world (world/create-genesis-vector-world 50)
+             :zoom 50
+             :running? false})

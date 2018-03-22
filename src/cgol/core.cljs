@@ -3,7 +3,10 @@
             [re-frame.core :as re-frame]
             [cgol.events]
             [cgol.subs]
-            [cgol.views :as views]))
+            [cgol.fxs]
+            [cgol.views :as views]
+            [goog.events]
+            [goog.events.EventType]))
 
 (defn dev-setup []
   (enable-console-print!)
@@ -16,6 +19,11 @@
 
 (defn ^:export init []
   (re-frame/dispatch-sync [:initialize-db])
+  
+  (.listen goog.events js/document goog.events.EventType/WHEEL
+           (fn [e] (let [down? (-> e .-event_ .-deltaY pos?)]
+                     (re-frame/dispatch (if down? [:zoom-out] [:zoom-in])))))
+  
   (dev-setup)
   (mount-root))
 

@@ -1,1 +1,20 @@
-h1{color: blue}
+.world{
+    position:absolute;
+}
+.row {
+    display: flex;
+}
+
+.cell{
+    border: 1px solid grey;
+    width: 10px;
+    height: 10px;
+}
+
+.alive{
+    background-color: black;
+}
+
+.dead{
+    background-color: white;
+}
